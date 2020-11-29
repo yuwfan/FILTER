@@ -180,7 +180,6 @@ python ./examples/run_xtag.py \
        ${OTHER_ARGS}
 }
 
-
 for task in xnli pawsx mlqa xquad tydiqa panx udpos; do
         if [[ ${TASK:-"xnli"} == $task ]]; then
                 $task

@@ -20,10 +20,13 @@ docker run --gpus all -it -v /path/to/FILTER:/ssd -it studyfang/multilingual:xtr
 
 1. Download raw data and our preprocessed data. 
 
-Please set your `DATA_ROOT` in init.sh, and then run the following command to download all data and our pretrained models.
+Please set your `DATA_ROOT` in init.sh, and then run the following command to download specified task and its pretrained FILTER models.
 ```bash
-bash scripts/download_data.sh
+bash scripts/download_data.sh ${task}
 ```
+
+To download all tasks and its pretrained models, please run `bash scripts/download_data.sh` which may take a while.
+
 
 2. Evaluate our pretrained models which are save in `$DATA_ROOT/outputs/phase${idx}/${task}` :
 ```bash
@@ -32,22 +35,26 @@ bash eval.sh -t ${task} -n phase${idx}/${task}
 
 where 
 - `idx` could be `1` (without self-teaching) or `2`(+ self-teaching).
-- `$task` is the name of the task to evaluate from (`[xnli, pawsx, mlqa, tydiqa, xquad, udpos, panx]`)
+- `task` is the name of the task to evaluate from (`[xnli, pawsx, mlqa, tydiqa, xquad, udpos, panx]`)
 
 ## Model Training
-We use translated training data for QA from XTREME team. Please refere to their [repo](https://github.com/google-research/xtreme) or their [translation](https://console.cloud.google.com/storage/browser/xtreme_translations) directly.
-
+For QA model training, we use translated training data from XTREME team. Please refere to their [repo](https://github.com/google-research/xtreme) or their [translation](https://console.cloud.google.com/storage/browser/xtreme_translations) directly.
 Once your data is ready, simply run the following command to train a FILTER model for supported XTREME tasks:
+```bash
+bash train.sh -t ${task} -n ${task}
+```
+To use different number of local and fusion layers, you can run this command:
 ```bash
 bash train.sh -t ${task} -n ${task}_k${k}_m${m}_ -x "--filter_k ${k} --filter_m ${m}"
 ```
 
 where 
-- `$task` is the name of the task to train from (`[xnli, pawsx, mlqa, tydiqa, xquad, udpos, panx]`)
+- `task` is the name of the task to train from (`[xnli, pawsx, mlqa, tydiqa, xquad, udpos, panx]`)
 - `k` is the number of fusion layers
 - `m` is the number of local layers
 
 The output model will be save into `${DATA_ROOT}/outputs/${task}_k${k}_m${m}`.
+
 **Note that we ran experiments on 8 V100 GPUs for FILTER models. You may need to increase `gradient_accumulation_steps` if you have less GPUs.**
 
 

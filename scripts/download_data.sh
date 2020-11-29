@@ -73,7 +73,7 @@ function download_udpos {
     out_dir=$base_dir/conll/
     mkdir -p $out_dir
 
-    mv $DATA_DIR/udpos/ $base_dir/translations
+    mv $DATA_DIR/udpos/ $DATA_DIR/translations
 
     cd $base_dir
     curl -s --remote-name-all https://lindat.mff.cuni.cz/repository/xmlui/bitstream/handle/11234/1-3105/ud-treebanks-v2.5.tgz
@@ -105,16 +105,17 @@ function download_udpos {
     cd $REPO
     bash $REPO/scripts/preprocess_udpos.sh xlm-roberta-large $DATA_DIR
 
-    mv $DATA_DIR/udpos-tmp/translations $DATA_DIR/udpos/udpos_processed_maxlen128/translations
+    mv $DATA_DIR/translations $DATA_DIR/udpos/udpos_processed_maxlen128/translations
 
 }
 
 function download_panx {
-    download_translations panx
-    mv $DATA_DIR/panx/ $DATA_DIR/translations
-
+    
     echo "Download panx NER dataset"
     if [ -f $DATA_DIR/AmazonPhotos.zip ]; then
+        download_translations panx
+        mv $DATA_DIR/panx/ $DATA_DIR/translations
+
         base_dir=$DATA_DIR/panx_dataset/
         unzip -qq -j $DATA_DIR/AmazonPhotos.zip -d $base_dir
         cd $base_dir
@@ -133,12 +134,13 @@ function download_panx {
 
         cd $REPO
         bash $REPO/scripts/preprocess_panx.sh xlm-roberta-large $DATA_DIR
+
+        mv $DATA_DIR/translations $DATA_DIR/panx/panx_processed_maxlen128/translations
     else
         echo "Please download the AmazonPhotos.zip file on Amazon Cloud Drive mannually and save it to $DATA_DIR/AmazonPhotos.zip"
         echo "https://www.amazon.com/clouddrive/share/d3KGCRCIYwhKJF0H3eWA26hjg2ZCRhjpEQtDL70FSBN"
     fi
 
-    mv $DATA_DIR/translations $DATA_DIR/panx/panx_processed_maxlen128/translations
 
 }
 

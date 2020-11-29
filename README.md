@@ -18,7 +18,7 @@ docker run --gpus all -it -v /path/to/FILTER:/ssd -it studyfang/multilingual:xtr
 
 **NOTE**: Please make sure you have set up the environment correctly. 
 
-1. Download raw data and our preprocessed data. 
+1. Download data and our models
 
 Please set your `DATA_ROOT` in init.sh, and then run the following command to download specified task and its pretrained FILTER models.
 ```bash
@@ -45,7 +45,7 @@ bash train.sh -t ${task} -n ${task}
 ```
 To use different number of local and fusion layers, you can run this command:
 ```bash
-bash train.sh -t ${task} -n ${task}_k${k}_m${m}_ -x "--filter_k ${k} --filter_m ${m}"
+bash train.sh -t ${task} -n ${task}_k${k}_m${m} -x "--filter_k ${k} --filter_m ${m}"
 ```
 
 where 

@@ -142,6 +142,7 @@ python ./examples/run_xqa.py \
        --doc_stride 128  \
        --output_dir $OUTPUT_DIR \
        --threads 8 \
+       --filter_m 1 --filter_k 20 \
        ${OTHER_ARGS}
 }
 
@@ -159,7 +160,7 @@ udpos() {
            --max_seq_length 128 \
            --per_gpu_eval_batch_size 64 \
            --do_eval \
-           --filter_m 1 --filter_k 20 \
+           --filter_m 1 --filter_k 1 \
            ${OTHER_ARGS}
 }
 
@@ -177,6 +178,7 @@ python ./examples/run_xtag.py \
        --max_seq_length 128 \
        --per_gpu_eval_batch_size 64 \
        --do_eval \
+       --filter_m 1 --filter_k 1 \
        ${OTHER_ARGS}
 }
 

@@ -241,8 +241,8 @@ function download_model() {
 
     mkdir -p $DATA_ROOT/outputs/phase1/$task $DATA_ROOT/outputs/phase2/$task
     for file in config.json pytorch_model.bin sentencepiece.bpe.model special_tokens_map.json tokenizer_config.json; do
-        wget ${BLOB}/outputs/phase1/${task}/$file -O $DOWNLOAD/outputs/phase1/$task/$file
-        wget ${BLOB}/outputs/phase2/${task}/$file -O $DOWNLOAD/outputs/phase2/$task/$file
+        wget ${BLOB}/data/outputs/phase1/${task}/$file -O $DATA_ROOT/outputs/phase1/$task/$file
+        wget ${BLOB}/data/outputs/phase2/${task}/$file -O $DATA_ROOT/outputs/phase2/$task/$file
     done
 }
 

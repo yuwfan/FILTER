@@ -56,6 +56,9 @@ function download_pawsx {
     # rename for FILTER
     mkdir -p $DATA_DIR/pawsx
     mv $DATA_DIR/x-final/en/train.tsv $DATA_DIR/pawsx/train.en-en.tsv
+    mv $DATA_DIR/x-final/en/dev_2k.tsv $DATA_DIR/pawsx/xtreme.en.dev
+    mv $DATA_DIR/x-final/en/test_2k.tsv $DATA_DIR/pawsx/xtreme.en.test
+    
     for lang in de es fr ja ko zh
     do
         mv $DATA_DIR/x-final/$lang/translated_train.tsv $DATA_DIR/pawsx/train.en-${lang}.tsv

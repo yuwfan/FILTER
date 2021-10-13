@@ -31,7 +31,7 @@ elif [ $MODEL == "xlm-roberta-large" ] || [ $MODEL == "xom-roberta-base" ]; then
 fi
 SAVE_DIR="$DATA_DIR/$TASK/${TASK}_processed_maxlen${MAXL}"
 mkdir -p $SAVE_DIR
-python3 $REPO/utils_preprocess.py \
+python3 $REPO/third_party/utils_preprocess.py \
   --data_dir $DATA_DIR/$TASK/ \
   --task panx_tokenize \
   --model_name_or_path $MODEL \

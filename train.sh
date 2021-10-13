@@ -186,12 +186,12 @@ tydiqa() {
 }
 
 udpos() {
-    python -m torch.distributed.launch --nproc_per_node=$N_GPU --master_port=$RANDOM ./examples/run_xtreme_tag.py \
+    python -m torch.distributed.launch --nproc_per_node=$N_GPU --master_port=$RANDOM ./examples/run_xtag.py \
            --task_name udpos \
-           --data_dir $DATA_ROOT/udpos/udpos_processed_maxlen128 \
+           --data_dir $DATA_DIR/udpos/udpos_processed_maxlen128 \
            --model_type filter \
            --model_name_or_path $MODEL_NAME_OR_PATH \
-           --labels $DATA_ROOT/udpos/udpos_processed_maxlen128/labels.txt \
+           --labels $DATA_DIR/udpos/udpos_processed_maxlen128/labels.txt \
            --language af,ar,bg,de,el,en,es,et,eu,fa,fi,fr,he,hi,hu,id,it,ja,kk,ko,mr,nl,pt,ru,ta,te,th,tl,tr,ur,vi,yo,zh \
            --train_language en \
            --do_train \
@@ -210,10 +210,10 @@ udpos() {
 }
 
 panx() {
-    python -m torch.distributed.launch --nproc_per_node=${N_GPU:-8} --master_port=$RANDOM ./examples/run_tag.py \
+    python -m torch.distributed.launch --nproc_per_node=${N_GPU:-8} --master_port=$RANDOM ./examples/run_xtag.py \
            --task_name panx \
-           --data_dir $DATA_ROOT/panx/panx_processed_maxlen128 \
-           --labels $DATA_ROOT/panx/panx_processed_maxlen128/labels.txt \
+           --data_dir $DATA_DIR/panx/panx_processed_maxlen128 \
+           --labels $DATA_DIR/panx/panx_processed_maxlen128/labels.txt \
            --model_type filter \
            --model_name_or_path $MODEL_NAME_OR_PATH \
            --language ar,he,vi,id,jv,ms,tl,eu,ml,ta,te,af,nl,en,de,el,bn,hi,mr,ur,fa,fr,it,pt,es,bg,ru,ja,ka,ko,th,sw,yo,my,zh,kk,tr,et,fi,hu \

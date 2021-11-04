@@ -32,7 +32,7 @@ fi
 
 SAVE_DIR="$DATA_DIR/${TASK}/udpos_processed_maxlen${MAXL}"
 mkdir -p $SAVE_DIR
-python3 $REPO/utils_preprocess.py \
+python3 $REPO/third_party/utils_preprocess.py \
   --data_dir $DATA_DIR/${TASK}/ \
   --task udpos_tokenize \
   --model_name_or_path $MODEL \
